@@ -590,11 +590,6 @@ func TestExecuteCall(t *testing.T) {
 
 func TestExecuteReturn(t *testing.T) {
 	p, _ := newTestProcessorWithPogram([]uint8{
-
-		/**
-		 * This is failing when i have the stacksize check in?
-		 **/
-
 		processor.MoveLitReg, 0x10, R0, // 0x0000->0x0002
 		processor.MoveLitReg, 0x11, R1, // 0x0003->0x0005
 		processor.MoveLitReg, 0x12, R2, // 0x0006->0x0008
