@@ -10,12 +10,25 @@ GebvM is an 8-bit register-based virtual machine.  GebVM has...
 
 **I/O** Input, output, and errors are written from/to stdin, stdout, and stderr (respectively).
 
-## Running the "Hello World" Program
+## An Example
 
+_These commands and paths can vary with Go version and local settings.  This was tested on v1.15._
 ```
-go get github.com/scottmcleodjr/gebvm
-go build github.com/scottmcleodjr/gebvm
-./gebvm $GOPATH/src/github.com/scottmcleodjr/gebvm/examples/hello_world.geb
+> # Pull the code
+> go get github.com/scottmcleodjr/gebvm
+>
+> # Run the tests
+> go test github.com/scottmcleodjr/gebvm/...
+?   	github.com/scottmcleodjr/gebvm	[no test files]
+ok  	github.com/scottmcleodjr/gebvm/memory	0.009s
+ok  	github.com/scottmcleodjr/gebvm/processor	0.033s
+>
+> # Build the project
+> go build github.com/scottmcleodjr/gebvm
+>
+> # Run hellow_world.geb
+> ./gebvm ~/go/src/github.com/scottmcleodjr/gebvm/examples/hello_world.geb
+Hello, World!
 ```
 
 ## Instructions
