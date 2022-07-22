@@ -601,7 +601,7 @@ func TestExecuteReturn(t *testing.T) {
 		processor.MoveLitReg, 0x22, R2,
 		processor.Return,
 	})
-	// Stepping through the instructiosn before the return
+	// Stepping through the instructions before the return
 	for i := 0; i < 8; i++ {
 		p.Step()
 	}
