@@ -1,5 +1,8 @@
 # GebVM
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/scottmcleodjr/gebvm)](https://goreportcard.com/report/github.com/scottmcleodjr/gebvm)
+[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](LICENSE)
+
 GebvM is an 8-bit register-based virtual machine.  GebVM has...
 
 **Registers** There are 8 8-bit registers (R0-R7) that store unsigned values.
