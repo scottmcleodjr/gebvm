@@ -4,8 +4,6 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-
-	"github.com/scottmcleodjr/gebvm/memory"
 )
 
 const (
@@ -14,8 +12,14 @@ const (
 	StackLimit    uint16 = 0xFFFF
 )
 
+type MemoryDevice interface {
+	WriteMemory(address uint16, value uint8)
+	ReadMemory(address uint16) uint8
+	LoadProgram(program []uint8) error
+}
+
 type Processor struct {
-	memory             memory.MemoryDevice
+	memory             MemoryDevice
 	registers          [RegisterCount]uint8
 	instructionPointer uint16
 	errors             []error       // errors encountered during execution
@@ -26,7 +30,7 @@ type Processor struct {
 	errorWriter        *bufio.Writer // writer for execution errors
 }
 
-func New(m memory.MemoryDevice, r *bufio.Reader, w, ew *bufio.Writer) *Processor {
+func New(m MemoryDevice, r *bufio.Reader, w, ew *bufio.Writer) *Processor {
 	return &Processor{
 		memory:       m,
 		stackPointer: StackStart,

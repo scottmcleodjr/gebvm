@@ -7,12 +7,6 @@ import (
 
 const MemorySize = math.MaxUint16 + 1 // Limit for 16-bit addresses
 
-type MemoryDevice interface {
-	WriteMemory(address uint16, value uint8)
-	ReadMemory(address uint16) uint8
-	LoadProgram(program []uint8) error
-}
-
 type Memory struct {
 	memory [MemorySize]uint8
 }
