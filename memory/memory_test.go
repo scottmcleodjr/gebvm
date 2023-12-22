@@ -18,10 +18,10 @@ func TestWriteAndReadMemory(t *testing.T) {
 
 	for _, test := range tests {
 		m := memory.New()
-		m.WriteMemory(test.address, test.value)
-		if m.ReadMemory(test.address) != test.value {
+		m.Write(test.address, test.value)
+		if m.Read(test.address) != test.value {
 			t.Errorf("got 0x%X at address 0x%X, want 0x%X",
-				m.ReadMemory(test.address), test.address, test.value)
+				m.Read(test.address), test.address, test.value)
 		}
 	}
 }
@@ -31,8 +31,8 @@ func TestLoadProgram(t *testing.T) {
 	m := memory.New()
 	m.LoadProgram(program)
 	for i, instruction := range program {
-		if m.ReadMemory(uint16(i)) != instruction {
-			t.Errorf("got 0x%X at address 0x%X, want 0x%X", m.ReadMemory(uint16(i)), i, instruction)
+		if m.Read(uint16(i)) != instruction {
+			t.Errorf("got 0x%X at address 0x%X, want 0x%X", m.Read(uint16(i)), i, instruction)
 		}
 	}
 

@@ -98,7 +98,7 @@ func (p *Processor) executeMoveLitMem() bool {
 	literal := p.fetchInstruction()
 	register := p.fetchInstruction()
 	address := p.registerPointerValue(register)
-	p.memory.WriteMemory(address, literal)
+	p.memory.Write(address, literal)
 	return true
 }
 
@@ -106,7 +106,7 @@ func (p *Processor) executeMoveRegMem() bool {
 	srcRegister := p.fetchInstruction()
 	addressRegister := p.fetchInstruction()
 	address := p.registerPointerValue(addressRegister)
-	p.memory.WriteMemory(address, p.RegisterValue(srcRegister))
+	p.memory.Write(address, p.RegisterValue(srcRegister))
 	return true
 }
 
@@ -114,7 +114,7 @@ func (p *Processor) executeMoveMemReg() bool {
 	addressRegister := p.fetchInstruction()
 	address := p.registerPointerValue(addressRegister)
 	dstRegister := p.fetchInstruction()
-	p.setRegisterValue(dstRegister, p.memory.ReadMemory(address))
+	p.setRegisterValue(dstRegister, p.memory.Read(address))
 	return true
 }
 
@@ -253,7 +253,7 @@ func (p *Processor) stackPush(value uint8) {
 		p.errors = append(p.errors, errors.New("stack overflow"))
 		return
 	}
-	p.memory.WriteMemory(p.stackPointer, value)
+	p.memory.Write(p.stackPointer, value)
 	p.stackPointer++
 	p.stackSize++
 }
@@ -261,7 +261,7 @@ func (p *Processor) stackPush(value uint8) {
 func (p *Processor) stackPop() uint8 {
 	p.stackPointer--
 	p.stackSize--
-	return p.memory.ReadMemory(p.stackPointer)
+	return p.memory.Read(p.stackPointer)
 }
 
 func (p *Processor) executeStackPushLit() bool {
@@ -324,7 +324,7 @@ func (p *Processor) executePrint() bool {
 	address := p.fetchAddressInstruction()
 	length := p.fetchInstruction()
 	for i := uint16(0); i < uint16(length); i++ {
-		fmt.Fprintf(p.writer, "%c", p.memory.ReadMemory(address+i))
+		fmt.Fprintf(p.writer, "%c", p.memory.Read(address+i))
 	}
 	p.writer.Flush()
 	return true

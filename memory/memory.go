@@ -15,11 +15,11 @@ func New() *Memory {
 	return &Memory{}
 }
 
-func (m *Memory) WriteMemory(address uint16, value uint8) {
+func (m *Memory) Write(address uint16, value uint8) {
 	m.memory[address] = value
 }
 
-func (m *Memory) ReadMemory(address uint16) uint8 {
+func (m *Memory) Read(address uint16) uint8 {
 	return m.memory[address]
 }
 
@@ -28,7 +28,7 @@ func (m *Memory) LoadProgram(program []uint8) error {
 		return errors.New("program length exceeds available memory")
 	}
 	for i, instruction := range program {
-		m.WriteMemory(uint16(i), instruction)
+		m.Write(uint16(i), instruction)
 	}
 	return nil
 }

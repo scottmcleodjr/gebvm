@@ -60,9 +60,9 @@ func TestExecuteMoveLitMem(t *testing.T) {
 			p.Step()
 			p.Step()
 			stepAndCheckContinueValue(t, p, true)
-			if m.ReadMemory(test.address) != test.literal {
+			if m.Read(test.address) != test.literal {
 				t.Errorf("got 0x%X at address 0x%X, want 0x%X",
-					m.ReadMemory(test.address), test.address, test.literal)
+					m.Read(test.address), test.address, test.literal)
 			}
 		}
 	}
@@ -81,8 +81,8 @@ func TestExecuteMoveRegMem(t *testing.T) {
 		p.Step()
 		p.Step()
 		stepAndCheckContinueValue(t, p, true)
-		if m.ReadMemory(address) != 0x42 {
-			t.Errorf("got 0x%X at address 0x%X, want 0x42", m.ReadMemory(address), address)
+		if m.Read(address) != 0x42 {
+			t.Errorf("got 0x%X at address 0x%X, want 0x42", m.Read(address), address)
 		}
 	}
 }
@@ -94,7 +94,7 @@ func TestExecuteMoveMemReg(t *testing.T) {
 			processor.MoveLitReg, highByte(address), R1,
 			processor.MoveLitReg, lowByte(address), R2,
 			processor.MoveMemReg, R1, R3})
-		m.WriteMemory(address, 0x42)
+		m.Write(address, 0x42)
 		p.Step()
 		p.Step()
 		stepAndCheckContinueValue(t, p, true)
@@ -476,11 +476,11 @@ func TestExecuteStackPushLit(t *testing.T) {
 	})
 	stepAndCheckContinueValue(t, p, true)
 	stepAndCheckContinueValue(t, p, true)
-	if m.ReadMemory(0xFF00) != 0x13 {
-		t.Errorf("got 0x%X at 0xFF00, want 0x13", m.ReadMemory(0xFF00))
+	if m.Read(0xFF00) != 0x13 {
+		t.Errorf("got 0x%X at 0xFF00, want 0x13", m.Read(0xFF00))
 	}
-	if m.ReadMemory(0xFF01) != 0x42 {
-		t.Errorf("got 0x%X at 0xFF01, want 0x42", m.ReadMemory(0xFF00))
+	if m.Read(0xFF01) != 0x42 {
+		t.Errorf("got 0x%X at 0xFF01, want 0x42", m.Read(0xFF00))
 	}
 	if p.StackPointer() != 0xFF02 {
 		t.Errorf("got 0x%X at SP, want 0xFF02", p.StackPointer())
@@ -501,11 +501,11 @@ func TestExecuteStackPushReg(t *testing.T) {
 	p.Step()
 	stepAndCheckContinueValue(t, p, true)
 	stepAndCheckContinueValue(t, p, true)
-	if m.ReadMemory(0xFF00) != 0x13 {
-		t.Errorf("got 0x%X at 0xFF00, want 0x13", m.ReadMemory(0xFF00))
+	if m.Read(0xFF00) != 0x13 {
+		t.Errorf("got 0x%X at 0xFF00, want 0x13", m.Read(0xFF00))
 	}
-	if m.ReadMemory(0xFF01) != 0x42 {
-		t.Errorf("got 0x%X at 0xFF01, want 0x42", m.ReadMemory(0xFF00))
+	if m.Read(0xFF01) != 0x42 {
+		t.Errorf("got 0x%X at 0xFF01, want 0x42", m.Read(0xFF00))
 	}
 	if p.StackPointer() != 0xFF02 {
 		t.Errorf("got 0x%X at SP, want 0xFF02", p.StackPointer())

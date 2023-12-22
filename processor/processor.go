@@ -13,8 +13,8 @@ const (
 )
 
 type MemoryDevice interface {
-	WriteMemory(address uint16, value uint8)
-	ReadMemory(address uint16) uint8
+	Write(address uint16, value uint8)
+	Read(address uint16) uint8
 	LoadProgram(program []uint8) error
 }
 
@@ -81,7 +81,7 @@ func (p *Processor) registerPointerValue(register uint8) uint16 {
 }
 
 func (p *Processor) fetchInstruction() uint8 {
-	instruction := p.memory.ReadMemory(p.instructionPointer)
+	instruction := p.memory.Read(p.instructionPointer)
 	p.instructionPointer++
 	// Detect instructionPointer overflow
 	if p.instructionPointer == 0x0000 {
